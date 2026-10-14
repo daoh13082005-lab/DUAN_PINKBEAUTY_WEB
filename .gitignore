@@ -1,0 +1,8 @@
+.git_backup/
+.env
+.env.*
+!.env.example
+*.log
+.vscode/
+.idea/
+node_modules/
