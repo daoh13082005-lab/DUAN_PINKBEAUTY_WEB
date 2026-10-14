@@ -6,16 +6,7 @@
         $list_products = $ProductModel->search_products($query);
     }
 
-    // Sản phẩm theo giá
-    if(isset($_GET['from_price']) && isset($_GET['to_price'])) {
-        $from_price = $_GET['from_price'];
-        $to_price = $_GET['to_price'];
-
-        $list_products = $ProductModel->search_products_by_price($from_price, $to_price);
-    }
-    
-    // Giá cao và thấp nhất của sản phẩm
-    $min_max_price = $ProductModel->get_min_max_prices();
+   
 
     $list_catgories = $CategoryModel->select_all_categories();
 ?>
@@ -35,9 +26,7 @@
                                 if(isset($_GET['query'])) {
                                     echo $_GET['query'];
                                 }
-                                if(isset($_GET['from_price']) && isset($_GET['to_price'])) {
-                                    echo "Giá từ ".$_GET['from_price']." đến ".$_GET['to_price'];
-                                }
+                                
                             
                             ?>
                         </span>
@@ -79,30 +68,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="sidebar__filter">
-                            <div class="section-title">
-                                <h4>TÌM THEO GIÁ</h4>
-                            </div>
-                            <div class="filter-range-wrap">
-                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="<?=$min_max_price['min_price']?>" data-max="<?=$min_max_price['max_price']?>"></div>
-                                <div class="range-slider">
-                                    <form action="tim-kiem" method="get">
-                                        
-                                        <div class="price-input">
-                                            <p>Giá từ:</p> <br>
-                                            <input type="text" name="from_price" id="minamount" > <p>đến</p>
-                                            <input type="text" name="to_price" id="maxamount" > <br>
-
-                                            <!-- Sử Dụng Thẻ a hoặc input de loc gia -->
-                                            <input type="submit" class="filter-price" name="" value="LỌC GIÁ">
-                                        </div>
-                                    </form>
-        
-                                </div>
-                            </div>
-                            <!-- <a href="#">LỌC GIÁ</a> -->
-                        </div>
+                       
                         
                     </div>
                 </div>
@@ -176,12 +142,14 @@
                         <div class="row rounded justify-content-center mx-0 pt-5">
                             <div class="col-md-6 text-center">
                                 <h4 class="mb-4">Không tìm thấy kết quả</h4>
+                                <?php /*
                                 <form action="tim-kiem" method="get">
                                     <div class="form-outline">
                                         <input type="search" name="query" class="form-control" placeholder="Tìm kiếm" />
                                     </div>
                                 </form>
-                                <a class="btn btn-primary rounded-pill py-3 px-5 mt-5" href="index.php?url=cua-hang">Trở lại cửa hàng</a>
+                                */ ?>
+                                <a class="btn btn-primary rounded-pill py-3 px-5 mt-5" href="index.php?url=cua-hang">Trở lại trang chủ</a>
                             </div>
                         </div>
                     </div>

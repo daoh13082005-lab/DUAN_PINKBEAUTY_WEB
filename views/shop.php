@@ -55,30 +55,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="sidebar__filter">
-                            <div class="section-title">
-                                <h4>TÌM THEO GIÁ</h4>
-                            </div>
-                            <div class="filter-range-wrap">
-                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="100000" data-max="5000000"></div>
-                                <div class="range-slider">
-                                    <form action="index.html" method="post">
-                                        
-                                        <div class="price-input">
-                                            <p>Giá từ:</p> <br>
-                                            <input type="text" id="minamount" > <p>đến</p>
-                                            <input type="text" id="maxamount" > <br>
-
-                                            <!-- Sử Dụng Thẻ a hoặc input de loc gia -->
-                                            <input type="submit" class="filter-price" name="" value="LỌC GIÁ">
-                                        </div>
-                                    </form>
-        
-                                </div>
-                            </div>
-                            <!-- <a href="#">LỌC GIÁ</a> -->
-                        </div>
+                        
                         
                         
                     </div>

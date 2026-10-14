@@ -136,7 +136,7 @@
 
                                             Hồ sơ
                                         </a>
-                                        <a href="index.php?url=don-hang" class="list-group-item list-group-item-action">Đơn mua</a>
+                                        
                                         <a href="index.php?url=doi-mat-khau" class="list-group-item list-group-item-action">Đổi mật khẩu</a>
                                         <a href="index.php?url=dang-xuat" class="list-group-item list-group-item-action">Đăng xuất</a>
 
@@ -193,7 +193,7 @@
                             <div class="col-lg-12">
                                 <div class="cart__btn">
                                     <input type="submit" name="update_profile" value="Cập nhật">
-                                    <a class="ml-2" href="index.php?url=thanh-toan">Đến trang thanh toán</a>
+                                    
                                 </div>
                             </div>
 

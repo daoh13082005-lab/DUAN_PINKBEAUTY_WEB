@@ -1,3 +1,5 @@
+<?php
+/*
 <div class="courses-area section-padding40 fix" style="background-color: #fefefe;">
         <div class="container">
             <div class="row justify-content-center my-5">
@@ -81,3 +83,4 @@
             </div>
         </div>
     </div>
+    */

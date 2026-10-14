@@ -1,3 +1,14 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Nếu chưa đăng nhập và cũng không có reset_email => chặn
+if (!isset($_SESSION['user']) && !isset($_SESSION['reset_email'])) {
+    header("Location: index.php?url=quen-mat-khau");
+    exit();
+}
+?>
 <!-- Breadcrumb Begin -->
 <?php
     $success = '';
@@ -103,7 +114,7 @@
             <div class="col-lg-12">
                 <div class="breadcrumb__links">
                     <a href="index.php"><i class="fa fa-home"></i> Trang chủ</a>
-                    <a href="ho-so">Tai khoản</a>
+                    <a href="ho-so">Tài khoản</a>
                     <span>Đổi mật khẩu</span>
                 </div>
             </div>
@@ -141,8 +152,7 @@
 
                                         Hồ sơ
                                     </a>
-                                    <a href="index.php?url=don-hang" class="list-group-item list-group-item-action">Đơn
-                                        mua</a>
+                                   
                                     <a href="index.php?url=doi-mat-khau"
                                         class="list-group-item list-group-item-action">Đổi mật khẩu</a>
                                     <a href="index.php?url=dang-xuat"
@@ -199,7 +209,7 @@
                         <div class="col-lg-12">
                             <div class="cart__btn">
                                 <input type="submit" name="change_password" value="Thay đổi">
-                                <a class="ml-2" href="index.php?url=thanh-toan">Đến trang thanh toán</a>
+                                
                             </div>
                         </div>
 

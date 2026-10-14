@@ -5,24 +5,31 @@
 
     $product_limit_3 = $ProductModel->select_products_limit(3);
     $product_order_by = $ProductModel->select_products_order_by(3, 'ASC');
+
+    $all_ratings = $ProductModel->get_all_ratings();
+
+    $new_products = $ProductModel->select_products_limit(3);          // Sản phẩm mới
+    $trending_products = $ProductModel->select_products_order_by(3, 'DESC'); // Xu hướng
+    $best_selling = $ProductModel->select_products_order_by(3, 'DESC'); // Bán chạy
+    $hot_sale = $ProductModel->select_products_by_cate(3);           // Hot sale 
 ?>
 
 <!-- Banner Section Begin -->
 <section class="container my-3">
         <div class="row">
             <div class="col-lg-8 col-sm-12">
-                <div id="header-carousel" class="carousel slide" data-ride="carousel">
+                <div id="header-carousel" class="carousel slide" data-ride="carousel" data-interval="1000">
                     <div class="carousel-inner" style="border-radius: 10px;">
                         <div class="carousel-item active" >
-                            <img class="img-fluid" src="public/img/banner/banner-main-1.jpg" alt="Image">
+                            <img class="img-fluid" src="public/img/15.jpg" alt="Image">
                             
                         </div>
                         <div class="carousel-item" >
-                            <img class="img-fluid" src="public/img/banner/banner-main-2.jpg" alt="Image">
+                            <img class="img-fluid" src="public/img/13.png" alt="Image">
                             
                         </div>
                         <div class="carousel-item" >
-                            <img class="img-fluid" src="public/img/banner/banner-main-3.jpg" alt="Image">
+                            <img class="img-fluid" src="public/img/12.png" alt="Image">
                             
                         </div>
                     </div>
@@ -41,11 +48,11 @@
             </div>
             <div class="col-lg-4">
                 <div class="product-offer" >
-                    <img class="img-fluid" src="public/img/banner/banner-sm-1.jpg" alt="">
+                    <img class="img-fluid" src="public/img/4.jpg" alt="">
                     
                 </div>
                 <div class="product-offer">
-                    <img class="img-fluid" src="public/img/banner/banner-sm-2.png" alt="">
+                    <img class="img-fluid"  src="public/img/5.jpg" alt="">
                     
                 </div>
             </div>
@@ -55,7 +62,7 @@
 
 
 <!-- Product Section Begin -->
-<section class="product spad" style="background-color: #F4F4F9;">
+<section class="product spad" style="background-color: #f7cfe9ff;">
 
     <!-- CATER -->
     <section class="container cate-home" style="background-color: #ffffff; border-radius: 10px;">    
@@ -86,7 +93,7 @@
     <!-- CATE END-->
 
 
-    <div class="container" style="background-color: #ffffff; border-radius: 10px;">
+    <div class="container" style="background-color: #ffffffff; border-radius: 10px;">
         
         <div class="row pt-3">
             <div class="col-lg-4 col-md-4">
@@ -136,6 +143,7 @@
                                         <a href="dang-nhap" ><span class="icon_bag_alt"></span></a>
                                     </button>
                                 <?php }?>
+                                
                             </li>
                             
                         </ul>
@@ -143,14 +151,8 @@
                     </div>
                     <div class="product__item__text">
                         <h6 class="text-truncate-1"><a href=""><?=$name?></a></h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
                         <div class="product__price"><?=number_format($sale_price) ."₫"?> <span><?=number_format($price)."đ"?></span></div>
+
                     </div>
                 </div>
             </div>
@@ -175,29 +177,29 @@
 
 
 <!-- Banner Section Begin -->
-<section class="banner set-bg" data-setbg="public/img/banner/banner-4.jpg">
+<section class="banner set-bg" data-setbg="public/img/14.png">
     <div class="container">
         <div class="row">
             <div class="col-xl-7 col-lg-8 m-auto">
                 <div class="banner__slider owl-carousel">
                     <div class="banner__item">
                         <div class="banner__text">
-                            <span>Bộ sưu tập</span>
-                            <h1>Sách thiếu nhi</h1>
+                            <span style="color: black">Sản phẩm nổi bật</span>
+                            <h1>Son</h1>
                             <a href="cua-hang">Mua ngay</a>
                         </div>
                     </div>
                     <div class="banner__item">
                         <div class="banner__text">
-                            <span>Bộ sưu tập</span>
-                            <h1>Halloween Sale</h1>
+                            <span style="color: black">Sản phẩm nổi bật</span>
+                            <h1>Sữa rửa mặt</h1>
                             <a href="cua-hang">Mua ngay</a>
                         </div>
                     </div>
                     <div class="banner__item">
                         <div class="banner__text">
-                            <span>Bộ sưu tập</span>
-                            <h1>Truyện tranh</h1>
+                            <span style="color: black">Sản phẩm nổi bật</span>
+                            <h1>Kem dưỡng</h1>
                             <a href="cua-hang">Mua ngay</a>
                         </div>
                     </div>
@@ -230,13 +232,6 @@
                             <h6>
                                 <a href="chitietsanpham&id_sp=<?=$product_id?>&id_dm=<?=$category_id?>" class="text-dark"><?=$name?></a>
                             </h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
                             <div class="product__price"><?=number_format($sale_price)?>₫</div>
                         </div>
                     </div>
@@ -263,13 +258,6 @@
                             <h6>
                                 <a href="chitietsanpham&id_sp=<?=$product_id?>&id_dm=<?=$category_id?>" class="text-dark"><?=$name?></a>
                             </h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
                             <div class="product__price"><?=number_format($sale_price)?>₫</div>
                         </div>
                     </div>
@@ -296,13 +284,6 @@
                             <h6>
                                 <a href="chitietsanpham&id_sp=<?=$product_id?>&id_dm=<?=$category_id?>" class="text-dark"><?=$name?></a>
                             </h6>
-                            <div class="rating">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                            </div>
                             <div class="product__price"><?=number_format($sale_price)?>₫</div>
                         </div>
                     </div>
@@ -322,19 +303,19 @@
         <div class="row">
             <div class="col-lg-6 p-0">
                 <div class="discount__pic">
-                    <img src="public/img/discount-2.jpg" alt="Hình ảnh">
+                    <img style="height: 390px" src=" public/img/7.jpg" alt="Hình ảnh">
                 </div>
             </div>
             <div class="col-lg-6 p-0">
                 <div class="discount__text">
                     <div class="discount__text__title">
                         <span>Khuyến mãi</span>
-                        <h2>Halloween</h2>
-                        <h5><span>Sale</span> 50%</h5>
+                        <h2>Skincare</h2>
+                        <h5><span>Sale</span> 40%</h5>
                     </div>
                     <div class="discount__countdown" id="countdown-time">
                         <div class="countdown__item">
-                            <span>22</span>
+                            <span>30</span>
                             <p>Ngày</p>
                         </div>
                         <div class="countdown__item">
@@ -366,7 +347,7 @@
                 <div class="services__item">
                     <i class="fa fa-car"></i>
                     <h6>Miễn phí vận chuyển</h6>
-                    <p>Cho tất cả các đơn hàng trên 200.000đ</p>
+                    <p>Cho tất cả các đơn hàng trên 100.000đ</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-6">

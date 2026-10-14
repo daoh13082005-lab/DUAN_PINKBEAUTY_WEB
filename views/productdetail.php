@@ -4,12 +4,11 @@
         $id_danhmuc = $_GET['id_dm'];
 
         $product_details = $ProductModel->update_views($id_sp);
-
+        
         $product_details = $ProductModel->select_products_by_id($id_sp);
         $similar_product = $ProductModel->select_products_similar($id_danhmuc);
         $name_catgoty = $CategoryModel->select_name_categories();
     } 
-
     
 ?>
 
@@ -17,11 +16,14 @@
     extract($product_details);
     $discount_percentage = $ProductModel->discount_percentage($price, $sale_price);
 
+    $ratingData = $ProductModel->get_rating_by_product($id_sp);
+    $avg_rating = $ratingData['avg_rating'] ?? 0;
+    $total_rating = $ratingData['total_rating'] ?? 0;
+
     // Bình luận
     if(isset($_GET['id_sp'])) {
         $product_id = $_GET['id_sp'];
         $list_comments = $CommentModel->select_comments_by_id($product_id);
-
     }
 ?>
 <!-- Breadcrumb Begin -->
@@ -86,14 +88,7 @@
                                 } ?>
                         </span>
                     </h3>
-                    <div class="rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <span>( <?=count($list_comments)?> bình luận )</span>
-                    </div>
+                   
                     <div class="product__details__price">
                         <?=$ProductModel->formatted_price($sale_price); ?>
                         <span class="ml-2">
@@ -105,6 +100,89 @@
                     <div class="short__description">
                         <?=$short_description?>
                     </div>
+                    
+                    <!-- HIỂN THỊ SAO ĐÁNH GIÁ -->
+                    <div class="product__details__rating mt-3">
+                        <span class="text-dark">Đánh giá: </span>
+
+                        <?php
+                            $fullStars = floor($avg_rating);
+                            $halfStar = ($avg_rating - $fullStars >= 0.5) ? 1 : 0;
+                            $emptyStars = 5 - ($fullStars + $halfStar);
+
+                            // Sao đầy
+                            for($i = 1; $i <= $fullStars; $i++) {
+                                echo '<i class="fa fa-star" style="color:#FFD700;"></i>';
+                            }
+                            // Sao nửa
+                            if($halfStar) {
+                                echo '<i class="fa fa-star-half-o" style="color:#FFD700;"></i>';
+                            }
+                            // Sao rỗng
+                            for($i = 1; $i <= $emptyStars; $i++) {
+                                echo '<i class="fa fa-star-o" style="color:#FFD700;"></i>';
+                            }
+                        ?>
+                        <span class="ml-2">(<?=$total_rating?> đánh giá)</span>
+                    </div>
+
+                    <!-- FORM ĐÁNH GIÁ -->
+                    <?php if(isset($_SESSION['user'])): ?>
+                    <div class="star-rating mt-3">
+                        <form action="index.php?url=rating" method="post" id="ratingForm">
+                            <input type="hidden" name="product_id" value="<?=$id_sp?>">
+                            <input type="hidden" name="user_id" value="<?=$_SESSION['user']['id']?>">
+                            <input type="hidden" name="rating" id="ratingValue" value="0">
+
+                             <!-- 5 SAO CLICK -->
+                            <span class="star" data-value="1">&#9733;</span>
+                            <span class="star" data-value="2">&#9733;</span>
+                            <span class="star" data-value="3">&#9733;</span>
+                            <span class="star" data-value="4">&#9733;</span>
+                            <span class="star" data-value="5">&#9733;</span>
+
+                            <button type="submit" class="btn btn-primary mt-2">Gửi đánh giá</button>
+                        </form>
+                    </div>
+                    
+                    <script>
+                    const stars = document.querySelectorAll('.star');
+                    const ratingInput = document.getElementById('ratingValue');
+
+                    stars.forEach(star => {
+                        star.addEventListener('mouseover', () => {
+                            const val = star.getAttribute('data-value');
+                            highlightStars(val);
+                        });
+
+                        star.addEventListener('mouseout', () => {
+                            const val = ratingInput.value;
+                            highlightStars(val);
+                        });
+
+                        star.addEventListener('click', () => {
+                            const val = star.getAttribute('data-value');
+                            ratingInput.value = val;
+                            highlightStars(val);
+                        });
+                    });
+
+                    function highlightStars(val) {
+                        stars.forEach(star => {
+                            if(star.getAttribute('data-value') <= val) {
+                                star.classList.add('selected');
+                            } else {
+                                star.classList.remove('selected');
+                            }
+                        });
+                    }
+                    </script>
+
+                    <?php else: ?>
+                        <div class="mt-3">
+                            <a href="dang-nhap" class="text-primary">Đăng nhập để đánh giá sản phẩm</a>
+                        </div>
+                    <?php endif; ?>
 
                     <?php if($quantity == 0){?>
 
@@ -145,9 +223,7 @@
                                 <button name="add_to_cart" style="border: none;" type="submit"
                                     class="cart-btn btn-primary"><span class="icon_bag_alt"></span> Thêm vào
                                     giỏ</button>
-                                <button name="add_to_cart" type="submit"
-                                    style="background-color: #ca1515; border: none;" class="cart-btn"><span
-                                        class="icon_bag_alt"></span>Mua ngay</button>
+                               
                             </div>
                         </form>
                         <?php }else{?>
@@ -174,11 +250,9 @@
                                     ngay</a>
                             </button>
                         </div>
+
                         <?php }?>
-                        <ul>
-                            <li><a href="#"><span class="icon_heart_alt"></span></a></li>
-                            <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
-                        </ul>
+                        <ul>        
                     </div>
 
                     <?php }?>
@@ -260,13 +334,7 @@
                                 <?=$name?>
                             </a>
                         </h6>
-                        <div class="rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
+                        
                         <div class="product__price"><?=$ProductModel->formatted_price($sale_price); ?>
                             <span><?=$ProductModel->formatted_price($price); ?> </span>
                         </div>
@@ -298,4 +366,20 @@
     background: #ca1515;
     border-radius: 5px;
 }
+.star-rating {
+    display: inline-block;
+}
+.star {
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.star:hover,
+.star.hover,
+.star.selected {
+    color: #FFD700;
+}
 </style>
+
+

@@ -42,7 +42,6 @@
             return $formatted_date = $datetime->format('H:i d-m-Y');
         }
 
-
     }
 
     $BaseModel = new BaseModel();

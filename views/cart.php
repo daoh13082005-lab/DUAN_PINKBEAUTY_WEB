@@ -7,36 +7,51 @@
         $user_id = $_POST["user_id"];
         $product_name = $_POST["name"];
         $product_price = $_POST["price"];
-        $product_quantity = $_POST["product_quantity"];
+        $product_quantity = intval($_POST["product_quantity"]); // Ép kiểu số
         $product_image = $_POST["image"];
 
-        if($product_quantity < 1 ) {
-            
-            echo "<script>alert('Số lượng sản phẩm không được nhỏ hơn 0');</script>";
+        if ($product_quantity < 1) {
+            echo "<script>alert('Số lượng sản phẩm không được nhỏ hơn 1');</script>";
             echo "<script>window.location.href='index.php?url=chitietsanpham&id_sp=".$product_id."&id_dm=16';</script>";
             exit();
         }
 
-        // Đếm số lượng sản trong giỏ hàng
+        // Lấy số lượng sản phẩm còn trong kho
+        $product_db = $ProductModel->select_products_by_id($product_id);
+        $stock_quantity = intval($product_db['quantity']);
+
+        // Lấy sản phẩm trong giỏ
         $product = $CartModel->select_cart_by_id($product_id, $user_id);
-        // Kiểm tra xem có sản phẩm trong giỏ hàng hay không
-        if($product && is_array($product)) {
-            // Số lượng mới = số lượng hiện tại + số lượng vừa thêm
-            $current_quantity = $product['product_quantity'];
+
+        if ($product && is_array($product)) {
+            // Đã có sản phẩm trong giỏ → tính lại tổng số lượng
+            $current_quantity = intval($product['product_quantity']);
             $new_quantity = $current_quantity + $product_quantity;
 
-            // Cập nhật số lượng
+            // Kiểm tra vượt kho
+            if ($new_quantity > $stock_quantity) {
+                echo "<script>alert('Chỉ còn {$stock_quantity} sản phẩm trong kho!');</script>";
+                echo "<script>window.location.href='index.php?url=chitietsanpham&id_sp=".$product_id."&id_dm=16';</script>";
+                exit();
+            }
+
+            // Cập nhật số lượng nếu hợp lệ
             $CartModel->update_cart($new_quantity, $product_id, $user_id);
-            $success .= 'Đã cập nhật số lượng cho sản phẩm: '.$product_name;
-        }
-        else {
-            $product_quantity = $product_quantity;
+            $success = "Đã cập nhật số lượng cho sản phẩm: " . $product_name;
+
+        } else {
+            // Sản phẩm chưa có trong giỏ → thêm mới
+            if ($product_quantity > $stock_quantity) {
+                echo "<script>alert('Chỉ còn {$stock_quantity} sản phẩm trong kho!');</script>";
+                echo "<script>window.location.href='index.php?url=chitietsanpham&id_sp=".$product_id."&id_dm=16';</script>";
+                exit();
+            }
+
             $CartModel->insert_cart($product_id, $user_id, $product_name, $product_price, $product_quantity, $product_image);
             $success = "Đã thêm sản phẩm vào giỏ hàng";
-            
         }
-
     }
+
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["update_cart"] ) && isset($_SESSION['user'])) {
         // header("Location: index.php?url=gio-hang");
@@ -225,12 +240,12 @@
                         <!-- Tổng thanh toán -->
                         <li>Tổng <span><?=number_format($totalPayment)?>đ</span></li>
                     </ul>
-                    <a href="index.php?url=thanh-toan" class="primary-btn">THANH TOÁN COD</a>
-                    <a href="thanh-toan-momo" class="btn-momo primary-btn mt-3">THANH TOÁN MOMO</a>
+                    <a href="index.php?url=thanh-toan" class="primary-btn">Mua hàng</a>
+
                 </div>
             </div>
         </div>
-    </div>
+    </div>  
 </section>
 <!-- Shop Cart Section End -->
 <?php }else { ?>

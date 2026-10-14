@@ -1,4 +1,18 @@
 <?php
+// Bắt đầu session nếu chưa có
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Include model
+require_once __DIR__ . '/../../models/BaseModel.php';
+require_once __DIR__ . '/../../models/CustomerModel.php';
+
+$BaseModel = new BaseModel();
+$CustomerModel = new CustomerModel();
+?>
+
+<?php
     $username_tmp = '';
     $password_tmp = '';
     $error ='';

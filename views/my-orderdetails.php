@@ -8,7 +8,7 @@
             extract($value);
         }
 
-        //Trang thái đơn hàng
+        //Trạng thái đơn hàng
         $order_status = 'Chưa xác nhận';
         if($status == 2) {
             $order_status = 'Đã xác nhận';

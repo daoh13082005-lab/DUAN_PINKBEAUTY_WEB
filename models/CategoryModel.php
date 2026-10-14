@@ -18,6 +18,5 @@
             return pdo_query($sql);
         }
     }
-
     $CategoryModel = new CategoryModel();
 ?>

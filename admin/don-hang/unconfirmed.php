@@ -58,8 +58,8 @@
                         </td>
                         <td class="td-responsive-2">
                         
-                            <a class="btn-sm btn-success" href="index.php?quanli=cap-nhat-don-hang&id=<?=$order_id?>">Xem</a>
-                            <a class="btn-sm btn-secondary" href="index.php?quanli=cap-nhat-don-hang&id=<?=$order_id?>">Sửa</a>                          
+                            <a class="btn-sm btn-success" href="index.php?quanli=cap-nhat-don-hang&id=<?=$order_id?>">Cập nhật</a>
+                                                  
                         </td>
                     </tr>
                     <?php

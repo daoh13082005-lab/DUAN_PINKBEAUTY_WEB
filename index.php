@@ -2,7 +2,6 @@
     ob_start();
     session_start();
 
-
     require_once "models/pdo_library.php";
     require_once "models/BaseModel.php";
     require_once "models/ProductModel.php";
@@ -14,8 +13,8 @@
     require_once "models/PostModel.php";
     require_once "models/AddressModel.php";
     define('BASE_URL', 'index.php?url=');
-    define('URL_MOMO', 'http://localhost/DUAN1_BOOKSTORE/cam-on');
-    define('URL_ORDER', 'http://localhost/DUAN1_BOOKSTORE/don-hang');
+    define('URL_MOMO', 'http://localhost/pinkbeauty/index.php?url=thanks');
+    define('URL_ORDER', 'http://localhost/pinkbeauty/views/my-order.php');
 
     require_once "components/head.php";
     require_once "components/header.php";
@@ -26,7 +25,7 @@
     }else {
         switch ($_GET['url']) {
             case 'trang-chu':
-                         
+                
                 require_once "views/home.php";
                 break;
             case 'cua-hang':
@@ -36,6 +35,10 @@
             case 'chitietsanpham':
                 
                 require_once "views/productdetail.php";
+                break;
+            case 'rating':
+
+                require_once "views/rating.php"; 
                 break;
             case 'danh-muc-san-pham':
                         
@@ -53,15 +56,10 @@
             case 'thanh-toan-2':    
                 require_once "views/checkout-address.php";
                 break; 
-            case 'thanh-toan-momo':    
-                require_once "views/checkout/checkout_momo.php";
+            case 'thanh-toan-momo':
+                require_once "views/user/thanh-toan-momo.php";
                 break;
-            case 'thanh-toan-momo-address':    
-                require_once "views/checkout/momo-address.php";
-                break;
-            case 'thanh-toan-momo-address-2':    
-                require_once "views/checkout/momo-address-2.php";
-                break;
+
             case 'thanh-toan-dia-chi2':    
                 require_once "views/thanh-toan-dia-chi.php";
                 break; 
@@ -80,6 +78,7 @@
                 break; 
             // User
             case 'dang-nhap':    
+    
                 require_once "views/user/login.php";
                 break; 
             case 'dang-ky':    
@@ -107,18 +106,7 @@
             case 'khoi-phuc-mat-khau':    
                 require_once "views/user/password-recovery.php";
                 break;
-
-            //Bài viết
-            case 'bai-viet':    
-                require_once "views/blog/blogs.php";
-                break;    
-            case 'chi-tiet-bai-viet':    
-                require_once "views/blog/blog-details.php";
-                break;    
-            case 'danh-muc-bai-viet':    
-                require_once "views/blog/blog-by-category.php";
-                break;
-            //Bài viết
+                
             case 'tim-kiem':    
                 require_once "views/search.php";
                 break;    
@@ -132,8 +120,6 @@
     require_once "components/minicart.php";
 
     require_once "components/footer.php";
-
-
     
     ob_end_flush();
 ?>

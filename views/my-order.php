@@ -77,7 +77,7 @@
             </ul>
             <hr>
             <div >
-                <a href="#" class="btn btn-custom" data-abc="true"> <i class="fa fa-chevron-left"></i> Trở lại</a>
+                
                 <div class="float-right">
                     <span class="text-dark">Thành tiền: </span> 
                     <span style="font-weight: 600;" class="text-danger mr-3"><?=number_format($total)?>₫</span>

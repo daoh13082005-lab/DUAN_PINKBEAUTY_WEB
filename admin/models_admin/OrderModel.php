@@ -2,6 +2,11 @@
     class OrderModel{
 
         // Select thông tin đon hàng
+        public function count_new_orders() {
+            $sql = "SELECT COUNT(*) as total_new FROM orders WHERE status = '1'";
+            return pdo_query_one($sql);
+        }
+
         public function select_list_orders_admin() {
             $sql = "
                     SELECT

@@ -60,6 +60,77 @@
             return pdo_query($sql, $category_id);
         }
 
+        public function get_rating_by_product($product_id) {
+            $sql = "SELECT AVG(rating) AS avg_rating, COUNT(*) AS total_rating 
+                    FROM ratings 
+                    WHERE product_id = ?";
+            return pdo_query_one($sql, $product_id);
+        }
+
+        public function insert_rating($product_id, $user_id, $rating) {
+            $sql = "INSERT INTO ratings(product_id, user_id, rating)
+                    VALUES (?, ?, ?)
+                    ON DUPLICATE KEY UPDATE rating = VALUES(rating)";
+            return pdo_execute($sql, $product_id, $user_id, $rating);
+        }
+
+        public function get_all_ratings() {
+            $sql = "SELECT product_id, AVG(rating) AS avg_rating, COUNT(*) AS total_rating
+                    FROM ratings
+                    GROUP BY product_id";
+            $result = pdo_query($sql);
+            
+            $ratings = [];
+            foreach($result as $row) {
+                $ratings[$row['product_id']] = [
+                    'avg_rating' => $row['avg_rating'],
+                    'total_rating' => $row['total_rating']
+                ];
+            }
+            return $ratings;
+        }
+
+        public function check_user_purchased_product($user_id, $product_id) {
+            // ⚠️ LƯU Ý: Bạn cần đảm bảo đã đổi tên bảng đơn hàng gốc là 'orders' (hoặc tên chính xác của bạn)
+            // và ID trạng thái 'Đã hoàn thành' là 3 (hoặc số chính xác của bạn)
+
+            $sql = "SELECT COUNT(od.product_id) 
+                    FROM orderdetails od 
+                    JOIN orders o ON od.order_id = o.order_id
+                    WHERE o.user_id = ? 
+                    AND od.product_id = ? 
+                    AND o.status = 4"; 
+
+            $result = pdo_query_value($sql, $user_id, $product_id);
+            
+            return $result > 0;
+        }
+
+        public function get_products_with_rating($limit, $order_by, $where = '') {
+            $sql = "
+                SELECT 
+                    p.*,
+                    r.id AS rating_id,
+                    r.rating,
+                    r.user_id,
+                    r.created_at
+                FROM products p
+                LEFT JOIN ratings r ON p.product_id = r.product_id
+                ORDER BY $orderBy
+                LIMIT $limit
+            ";
+                    
+        }
+
+        public function check_user_reviewed_product($user_id, $product_id) {
+            // Truy vấn SQL: Đếm số bản ghi đánh giá (ratings) mà người dùng (user_id) 
+            // đã thực hiện cho sản phẩm (product_id) này.
+            $sql = "SELECT COUNT(*) FROM ratings WHERE user_id = ? AND product_id = ?"; // <--- Đây là SQL kiểm tra đã đánh giá chưa
+            $result = pdo_query_value($sql, $user_id, $product_id);
+            
+            return $result > 0;
+        }
+
         function select_list_products($page, $perPage) {
             // Tính toán vị trí bắt đầu của kết quả trên trang hiện tại
             $start = ($page - 1) * $perPage;

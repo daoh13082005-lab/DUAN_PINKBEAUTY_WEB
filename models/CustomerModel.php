@@ -1,6 +1,14 @@
 <?php
     class CustomerModel {
-
+        
+        public function update_password_by_email($hashed, $email)
+    {
+        $conn = pdo_get_connection();
+        $sql = "UPDATE users SET password = ? WHERE email = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$hashed, $email]);
+    }
+    
         public function select_users() {
             $sql = "SELECT username, full_name, email, phone FROM users";
 

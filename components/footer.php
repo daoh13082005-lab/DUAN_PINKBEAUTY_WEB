@@ -7,20 +7,20 @@
             <div class="col-lg-4 col-md-6 col-sm-7">
                 <div class="footer__about">
                     <div class="footer__logo">
-                        <a href="./index.html"><img src="public/img/fahasa-logo.png" alt=""></a>
+                        <a href="./index.html"><img src="public/img/logo8.jpg" alt="Logo" width="100"></a>
+
                     </div>
-                    <p>Chào mừng bạn đến với FAHASA nơi cung cấp những loại sách chất lượng</p>
-                    
+                    <p>“Mỹ phẩm chuẩn xịn<br>– Da đẹp chuẩn trend.”</p>
+
                 </div>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-5">
                 <div class="footer__widget">
                     <h6>ĐƯỜNG DẪN</h6>
                     <ul>
-                        <li><a href="#">Về chúng tôi</a></li>
-                        <li><a href="#">Blogs</a></li>
-                        <li><a href="#">Liên hệ</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="index.php?url=trang-chu">Trang chủ</a></li>
+                        <li><a href="index.php?url=cua-hang">Sản phẩm</a></li>
+                        <li><a href="index.php?url=lien-he">Liên hệ</a></li>
                     </ul>
                 </div>
             </div>
@@ -28,10 +28,9 @@
                 <div class="footer__widget">
                     <h6>tÀI khoẢN</h6>
                     <ul>
-                        <li><a href="#">Tài khoản của tôi</a></li>
-                        <li><a href="#">Theo dõi đơn hàng</a></li>
-                        <li><a href="#">Thủ tục thanh toán</a></li>
-                        <li><a href="#">Danh sách yêu thích</a></li>
+                        <li><a href="index.php?url=thong-tin-tai-khoan">Tài khoản của tôi</a></li>
+                        <li><a href="index.php?url=don-hang">Theo dõi đơn hàng</a></li>
+                        <li><a href="index.php?url=thanh-toan">Thủ tục thanh toán</a></li>
                     </ul>
                 </div>
             </div>
@@ -42,13 +41,7 @@
                         <input type="text" placeholder="Email">
                         <button type="submit" class="site-btn">Theo dõi</button>
                     </form>
-                    <div class="footer__payment">
-                        <a href="#"><img src="public/img/payment/payment-1.png" alt=""></a>
-                        <a href="#"><img src="public/img/payment/payment-2.png" alt=""></a>
-                        <a href="#"><img src="public/img/payment/payment-3.png" alt=""></a>
-                        <a href="#"><img src="public/img/payment/payment-4.png" alt=""></a>
-                        <a href="#"><img src="public/img/payment/payment-5.png" alt=""></a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -57,7 +50,7 @@
             <div class="col-lg-12">
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 <div class="footer__copyright__text">
-                    <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">KHOA NGUYEN</a></p>
+                    <p> @ 2025 Thiết kế và triển khai web</a></p>
                 </div>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </div>
@@ -115,15 +108,12 @@
 <script src="public/js/main.js"></script>
 
 <!-- dialogflow -->
-<script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-<df-messenger
-    intent="WELCOME"
-    chat-title="Chat"
-    agent-id="a111a74a-8334-4098-9636-0f1433d6fc97"
-    language-code="vi"
-></df-messenger>
 
-
+   
+   
+<script src="https://cdn.botpress.cloud/webchat/v3.4/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/11/16/12/20251116121128-N8HAUBXZ.js" defer></script>
+    
 </body>
 
 </html>

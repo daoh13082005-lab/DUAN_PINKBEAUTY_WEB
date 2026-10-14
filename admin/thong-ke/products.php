@@ -6,7 +6,7 @@ $statistics_category = $OrderModel->get_statistics();
 <div class="container-fluid pt-4 px-4">
     <div class="bg-light text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
-            <h6 class="mb-0">Thống sản phẩm theo danh mục</h6>
+            <h6 class="mb-0">Thống kê sản phẩm theo danh mục</h6>
 
         </div>
 
@@ -45,16 +45,6 @@ $statistics_category = $OrderModel->get_statistics();
                     
 
                 </tbody>
-                <tfoot>
-                    <tr class="text-dark">
-                        <th scope="col">#</th>
-                        <th scope="col">Tên danh mục</th> 
-                        <th scope="col">Số lượng</th>   
-                        <th scope="col">Giá thấp nhất	</th>     
-                        <th scope="col">Giá cao nhất</th>          
-                        <th scope="col">Giá trung bình</th>     
-                    </tr>
-                </tfoot>
             </table>
             
         </div>

@@ -1,4 +1,5 @@
-<style>
+<?php
+/*<style>
         .video-courses .box-video{
             width: 100%; height: 600px
         }

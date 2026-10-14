@@ -32,8 +32,7 @@
 
                                     Hồ sơ
                                 </a>
-                                <a href="index.php?url=don-hang" class="list-group-item list-group-item-action">Đơn
-                                    mua</a>
+                                
                                 <a href="index.php?url=doi-mat-khau" class="list-group-item list-group-item-action">Đổi
                                     mật khẩu</a>
                                 <a href="index.php?url=dang-xuat" class="list-group-item list-group-item-action">Đăng
@@ -143,8 +142,7 @@
                             <div class="col-sm-4 d-flex">
 
                                 <a href="ho-so" class="btn btn-outline-dark btn-rounded mb-4">Sửa hồ sơ</a>
-                                <a href="index.php?url=don-hang" class="btn btn-danger btn-rounded mb-4 ml-2">Đơn
-                                    mua</a>
+                                
 
 
                             </div>

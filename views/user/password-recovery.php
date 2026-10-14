@@ -1,4 +1,5 @@
 <?php
+$email = '';
     if(isset($_GET['email']) && isset($_GET['token'])) {
         $email = $_GET['email'];
         $token = $_GET['token'];

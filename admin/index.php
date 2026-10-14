@@ -11,14 +11,11 @@
     require_once "models_admin/ProductModel.php";
     require_once "models_admin/CustomerModel.php";
     require_once "models_admin/OrderModel.php";
-    require_once "models_admin/PostModel.php";
     require_once "models_admin/CommentModel.php";
-    require_once "models_admin/WarehousemModel.php";
+    require_once "models_admin/WarehouseModel.php";
 
     require_once "components/head.php";
     require_once "components/header.php";
-    
-    
 
     if(!isset($_GET['quanli'])) {
         require_once "home.php";
@@ -65,26 +62,7 @@
 
                 require_once "don-hang/edit.php";         
                 break;
-            // Bài viết
-            case 'danh-sach-bai-viet':
-
-                require_once "bai-viet/list.php";         
-                break;
-            case 'them-bai-viet':
-
-                require_once "bai-viet/add.php";         
-                break;
-            case 'cap-nhat-bai-viet':
-                require_once "bai-viet/edit.php";         
-                break;    
-            case 'danh-muc-bai-viet':
-
-                require_once "bai-viet/category.php";         
-                break;
-            case 'cap-nhat-danh-muc-bai-viet':
-
-                require_once "bai-viet/edit_catgory.php";         
-                break;
+           
             //Tài khoản
             case 'dang-xuat':
                 unset($_SESSION['user_admin']);
@@ -128,16 +106,6 @@
             case 'xuat-exel':
                 require_once "export_exel/export_orders.php";         
                 break;
-            case 'kho-hang2':
-                require_once "kho-hang/list.php";         
-                break;
-            case 'kho-hang':
-                require_once "kho-hang/danhsach.php";         
-                break;
-            case 'them-hoa-don':
-                require_once "kho-hang/add.php";         
-                break;
-            
 
             default:
                 require_once "components/404.php";

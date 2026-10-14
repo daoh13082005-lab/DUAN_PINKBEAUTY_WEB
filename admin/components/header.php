@@ -15,7 +15,7 @@
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
                 <a href="index.php" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa fa-user me-2"></i>ADMIN</h3>
+                    <h3 class="text-primary"><i class="fa fa fa-user me-2"></i>PB</h3>
                 </a>
                 <!-- <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -59,16 +59,7 @@
 
                         </div>
                     </div>
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                                class="fas fa-book me-2"></i> Bài viết</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a href="index.php?quanli=danh-sach-bai-viet" class="dropdown-item">Tất cả</a>
-                            <a href="index.php?quanli=them-bai-viet" class="dropdown-item">Thêm bài viết</a>
-                            <a href="index.php?quanli=danh-muc-bai-viet" class="dropdown-item">Chuyên mục</a>
 
-                        </div>
-                    </div>
 
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
@@ -79,11 +70,6 @@
 
                         </div>
                     </div>
-
-                    <a href="index.php?quanli=kho-hang" class="nav-item nav-link"><i
-                            class="fas fa-warehouse me-2"></i>Quản
-                        lý kho</a>
-
                     <a href="index.php?quanli=danh-sach-khach-hang" class="nav-item nav-link"><i
                             class="fas fa-users me-2"></i>Thành viên</a>
                     <a href="index.php?quanli=binh-luan" class="nav-item nav-link"><i
@@ -121,47 +107,51 @@
                     <input class="form-control border-0" type="search" placeholder="Tìm kiếm">
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
-                    <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-envelope me-lg-2"></i>
-                            <span class="d-none d-lg-inline-flex">Tin nhắn</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-white border-1 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="public_admin/img/user-default.png" alt=""
-                                        style="width: 40px; height: 40px;">
-                                    <div class="ms-2">
-                                        <h6 class="fw-normal mb-0">hello everyone</h6>
-                                        <small>15 phút trước</small>
-                                    </div>
-                                </div>
-                            </a>
-                            <hr class="dropdown-divider">
+                    <?php
+                        // ✅ Đặt đoạn này ngay TRƯỚC phần HTML thông báo
+                        require_once __DIR__ . '/../models_admin/OrderModel.php';
+                        $OrderModel = new OrderModel();
+                        $new_orders = $OrderModel->count_new_orders();
+                        $count = $new_orders['total_new'];
+                    ?>
 
-                            <a href="#" class="dropdown-item text-center">Xem tất cả</a>
-                        </div>
-                    </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-bell me-lg-2"></i>
+                            <i class="fa fa-bell me-lg-2 position-relative">
+                                <!-- ✅ Hiển thị badge số lượng đơn mới -->
+                                <?php if ($count > 0): ?>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                         style="font-size: 12px; font-weight: bold; font-family: 'Poppins', sans-serif;">
+                                       <?=$count?>
+                                    </span>
+                                                                    
+                                <?php endif; ?>
+                            </i>
                             <span class="d-none d-lg-inline-flex">Thông báo</span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-white border-1 rounded-0 rounded-bottom m-0">
-                            <a href="#" class="dropdown-item">
-                                <h6 class="fw-normal mb-0">1 Đơn hàng mới</h6>
-                                <small>10:20 20-11-2023</small>
-                            </a>
-                            <hr class="dropdown-divider">
 
-                            <a href="#" class="dropdown-item text-center">Xem tất cả</a>
+                        <div class="dropdown-menu dropdown-menu-end bg-white border-1 rounded-0 rounded-bottom m-0">
+                            <?php if ($count > 0): ?>
+                                <a href="index.php?quanli=danh-sach-don-hang" class="dropdown-item">
+                                    <h6 class="fw-normal mb-0"><?=$count?> Đơn hàng mới</h6>
+                                    <small><?=date("H:i d-m-Y")?></small>
+                                </a>
+                                <hr class="dropdown-divider">
+                            <?php else: ?>
+                                <a href="#" class="dropdown-item text-center text-muted">Không có thông báo mới</a>
+                                <hr class="dropdown-divider">
+                            <?php endif; ?>
+
+                            <a href="index.php?quanli=danh-sach-don-hang" class="dropdown-item text-center">Xem tất cả</a>
                         </div>
                     </div>
+
+                
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="public_admin/img/user-default.png" alt=""
                                 style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">Khoa Nguyen</span>
+                            <span class="d-none d-lg-inline-flex">ADMIN</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-white border-1 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">Hồ sơ</a>
